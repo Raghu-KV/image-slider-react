@@ -50,15 +50,18 @@ function App() {
       >
         <FiChevronLeft size={30} />
       </div>
-      <div className="flex gap-2 bottom-[10%] left-[45%] right-[45%] absolute">
-        {images.map((image, index) => (
-          <div
-            className={`h-3 w-3 rounded-full bg-white opacity-30 cursor-pointer ${
-              currentImage === index && "opacity-70"
-            }`}
-            onClick={() => setCurrentImage(index)}
-          ></div>
-        ))}
+      <div className="flex justify-center">
+        <div className="flex gap-3 bottom-[10%] absolute">
+          {images.map((image, index) => (
+            <div
+              className={`h-3 w-3 rounded-full bg-white opacity-30 cursor-pointer ${
+                currentImage === index && "opacity-70"
+              }`}
+              onClick={() => setCurrentImage(index)}
+            ></div>
+          ))}
+        </div>
+        
       </div>
     </div>
   );
