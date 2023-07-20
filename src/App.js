@@ -1,6 +1,6 @@
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import { useState } from "react";
-
+import "./App.css";
 function App() {
   const images = [
     {
@@ -32,38 +32,47 @@ function App() {
   };
 
   return (
-    <div className="max-w-[1400px] h-[780px] w-full mx-auto relative py-16 px-4 group">
-      <div
-        className="h-full w-full bg-center bg-cover duration-500 rounded-2xl"
-        style={{ backgroundImage: `url(${images[currentImage].url})` }}
-      ></div>
-      <div
-        className="absolute top-[50%] right-9 bg-slate-100 opacity-0 rounded-full group-hover:opacity-90 duration-300 cursor-pointer"
-        onClick={nextImage}
-      >
-        <FiChevronRight size={30} />
+    <>
+      <div className="max-w-[1400px] h-[780px] w-full mx-auto relative py-16 px-4 group">
+        <div
+          className="h-full w-full bg-center bg-cover duration-500 rounded-2xl"
+          style={{ backgroundImage: `url(${images[currentImage].url})` }}
+        ></div>
+        <div
+          className="absolute top-[50%] right-9 bg-slate-100 opacity-0 rounded-full group-hover:opacity-90 duration-300 cursor-pointer"
+          onClick={nextImage}
+        >
+          <FiChevronRight size={30} />
+        </div>
+
+        <div
+          className="absolute top-[50%] left-9 bg-slate-100 opacity-0 rounded-full group-hover:opacity-90 duration-300 cursor-pointer"
+          onClick={prviousImage}
+        >
+          <FiChevronLeft size={30} />
+        </div>
+        <div className="flex justify-center">
+          <div className="flex gap-3 bottom-[10%] absolute">
+            {images.map((image, index) => (
+              <div
+                className={`h-3 w-3 rounded-full bg-white opacity-30 cursor-pointer ${
+                  currentImage === index && "opacity-70"
+                }`}
+                onClick={() => setCurrentImage(index)}
+              ></div>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <div
-        className="absolute top-[50%] left-9 bg-slate-100 opacity-0 rounded-full group-hover:opacity-90 duration-300 cursor-pointer"
-        onClick={prviousImage}
-      >
-        <FiChevronLeft size={30} />
-      </div>
-      <div className="flex justify-center">
-        <div className="flex gap-3 bottom-[10%] absolute">
-          {images.map((image, index) => (
-            <div
-              className={`h-3 w-3 rounded-full bg-white opacity-30 cursor-pointer ${
-                currentImage === index && "opacity-70"
-              }`}
-              onClick={() => setCurrentImage(index)}
-            ></div>
+      <div>
+        <div className="mb-24 flex overflow-hidden w-[250px]">
+          {images.map((image) => (
+            <img src={image.url} className="object-cover h-[250px] w-[250px]" />
           ))}
         </div>
-        
       </div>
-    </div>
+    </>
   );
 }
 
