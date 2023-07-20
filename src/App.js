@@ -31,6 +31,20 @@ function App() {
     setCurrentImage(nextImage);
   };
 
+  const [currentImage2, setCurrentImage2] = useState(0);
+
+  const prviousImage2 = () => {
+    const isFirstIndex = currentImage2 === 0;
+    const prvImage = isFirstIndex ? images.length - 1 : currentImage2 - 1;
+    setCurrentImage2(prvImage);
+  };
+
+  const nextImage2 = () => {
+    const isLastIndex = images.length - 1 === currentImage2;
+    const nextImage = isLastIndex ? 0 : currentImage2 + 1;
+    setCurrentImage2(nextImage);
+  };
+
   return (
     <>
       <div className="max-w-[1400px] h-[780px] w-full mx-auto relative py-16 px-4 group">
@@ -66,10 +80,31 @@ function App() {
       </div>
 
       <div>
-        <div className="mb-24 flex overflow-hidden w-[250px]">
+        <div className="mb-24 flex overflow-hidden w-[500px] mx-auto relative">
           {images.map((image) => (
-            <img src={image.url} className="object-cover h-[250px] w-[250px]" />
+            <img
+              src={image.url}
+              className={`object-cover rounded-lg duration-300 ease-out translate-x-[-${
+                currentImage2 * 100
+              }%]`}
+              // style={{ transform: `translateX(-${currentImage2}* 100)%` }}
+            />
           ))}
+
+          <div className="absolute inset-4 flex justify-between items-center">
+            <div
+              className="bg-white rounded-full cursor-pointer"
+              onClick={prviousImage2}
+            >
+              <FiChevronLeft size={30} />
+            </div>
+            <div
+              className="bg-white rounded-full cursor-pointer"
+              onClick={nextImage2}
+            >
+              <FiChevronRight size={30} />
+            </div>
+          </div>
         </div>
       </div>
     </>
