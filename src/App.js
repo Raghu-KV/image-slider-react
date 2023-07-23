@@ -1,5 +1,5 @@
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 function App() {
   const images = [
@@ -45,6 +45,11 @@ function App() {
     setCurrentImage2(nextImage);
   };
 
+  // useEffect(() => {
+  //   const autoSlide = setInterval(nextImage2, 1000);
+  //   return () => clearInterval(autoSlide);
+  // }, []);
+
   return (
     <>
       <div className="max-w-[1400px] h-[780px] w-full mx-auto relative py-16 px-4 group">
@@ -83,6 +88,7 @@ function App() {
         <div className="mb-24 flex overflow-hidden w-[500px] mx-auto relative">
           {images.map((image) => (
             <img
+              key={image.url}
               src={image.url}
               className={`object-cover rounded-lg duration-300 ease-out translate-x-[-${
                 currentImage2 * 100
@@ -105,6 +111,31 @@ function App() {
               <FiChevronRight size={30} />
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="bg-blue-600 overflow-hidden">
+        <div className="flex">
+          {images.map((image) => (
+            <div className="flex gap-6  items-center bg-orange-300 flex-auto">
+              <div className="">
+                <img
+                  src={image.url}
+                  alt=""
+                  className="w-[500px] h-[500px] object-cover"
+                />
+              </div>
+              <div>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
+                  repellat ex necessitatibus aperiam aliquid perspiciatis ut
+                  laboriosam, a sapiente temporibus esse et? Totam expedita sit
+                  ducimus similique fugiat molestiae corporis?
+                </p>
+                <button className="bg-blue-600">click</button>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </>
